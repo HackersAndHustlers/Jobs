@@ -1,0 +1,13 @@
+.back
+  %a{:href => "/"} &larr; All Jobs
+.page-content.both-rounded
+  .job
+    %form#unsubscribe-form{:action => "/unsubscribe", :method => "post", :class => "form-stacked"}
+      %h1 Unsubscribe From Emails
+      %label Email Address
+      .input-prepend
+        %span.add-on <i class="icon-envelope"></i>
+        %input#unsub-email{:type => "text", :style => "width: 190px;", :name => "email"}
+        <label class="jserror" for="email" id="name_error">This field is required.</label>
+      %input#unsubscribe-submit{:type => "submit", :class => "btn primary", :value => "Unsubscribe"}
+.bottom-tear

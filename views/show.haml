@@ -1,0 +1,34 @@
+.back
+  %a{:href => "/"} &larr; All Jobs
+.page-content.both-rounded
+  .job
+    - if @job.job_type == 'intern'
+      %span.job_type.label intern
+    - elsif @job.job_type == 'cofounder'
+      %span.job_type.label.label-info Co-founder
+    - elsif @job.job_type == 'fulltime'
+      %span.job_type.label.label-success full time
+    - elsif @job.job_type == 'contract'
+      %span.job_type.label.label-warning contract
+    %h1
+      = @job.position
+      %small
+        at
+        %a{:href => @job.url}= @job.company
+    - if @job.location
+      .job-location
+        %img{:src => "http://maps.googleapis.com/maps/api/staticmap?center=#{@job.location}&zoom=10&size=100x100&sensor=false"}
+        %p= @job.location
+    .job-description
+      = RDiscount.new(@job.description, :smart, :filter_html).to_html
+    %a#job-email-link.btn{:href => "mailto:#{@job.email}"} E-mail #{@job.company} about this job
+    %a{:href => "http://twitter.com/share", :class => "twitter-share-button", "data-lang" => "en", "data-url" => "http://hackersandhustlers.org/job/#{params[:id]}", "data-text" => "#{@job.company} is hiring a #{@job.position}", "data-via" => "hnhjobs"} Tweet
+    .clear
+    %script
+      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+.bottom-tear
+:javascript
+_kmq.push(['record', 'Viewed Job', {'Job Info':"#{@job.company} | #{@job.position}"}]);
+$('#job-email-link').click(function(){
+_kmq.push(['record', 'Emailed Company About Job', {'Job Info':"#{@job.company} | #{@job.position}"}]);
+});

@@ -1,0 +1,94 @@
+.tabbable
+  %ul.nav.nav-tabs
+    %li.active
+      %a{:href => "#pending_jobs", "data-toggle".to_sym => "tab"} 
+        Pending Jobs
+        .label.label-warning #{@pending_jobs.count}
+    %li
+      %a{:href => "#approved_jobs", "data-toggle".to_sym => "tab"} 
+        Approved Jobs 
+        .label.label-success #{@approved_jobs.count}
+    %li
+      %a{:href => "#subscriber_list", "data-toggle".to_sym => "tab"}
+        Subscribers
+        .label.label-info #{@subscribers.count}
+
+.tab-content
+  #pending_jobs.page-content.tab-pane.active
+    - if @pending_jobs.count > 0
+      - @pending_jobs.each do |job|
+        .job
+          - if job.job_type == 'intern'
+            %span.job_type.label intern
+          - elsif job.job_type == 'cofounder'
+            %span.job_type.label.label-info Co-founder
+          - elsif job.job_type == 'fulltime'
+            %span.job_type.label.label-success full time
+          - elsif job.job_type == 'contract'
+            %span.job_type.label.label-warning contract
+          - else
+            %form#categorize_job.form-horizontal{:method => "post", :action => '/categorize-job'}
+              %input{:type => "hidden", :name => "id", :value => job.id}
+              %select{:name => "job_type"}
+                %option{:value => "intern"} Internship
+                %option{:value => "cofounder"} Co-founder
+                %option{:value => "fulltime"} Full Time
+                %option{:value => "contract"} Contract
+              %input.btn.btn-primary{:type => "Submit"}
+          %h3
+            = job.position
+            %small
+              at
+              %a{:href => job.url, :target => 'blank'}= job.company
+          .job-location
+            %img{:src => "http://maps.googleapis.com/maps/api/staticmap?center=#{job.location}&zoom=10&size=100x100&sensor=false"}
+            %p= job.location
+          .job-description
+            = RDiscount.new(job.description, :smart, :filter_html).to_html
+          %a.btn{:href => "mailto:#{job.email}"} Contact
+          %a.btn{:href => "/admin/edit/#{job.id}"} Edit
+          %a.require-confirm.btn.btn-success.approve-job{:href => "/approve-job?id=#{job.id}", :id => "#{job.id}"} Approve
+          %a.require-confirm.btn.btn-danger.deny-job{:href => "/deny/#{job.id}"} Deny
+          .clear
+    - else
+      .job
+        %h2 No Pending Jobs!
+        %p Get to work getting people to sign up! Hurry up! Now!
+  #approved_jobs.page-content.tab-pane
+    - @approved_jobs.each do |job|
+      .job
+        - if job.job_type == 'intern'
+          %span.job_type.label intern
+        - elsif job.job_type == 'cofounder'
+          %span.job_type.label.label-info Co-founder
+        - elsif job.job_type == 'fulltime'
+          %span.job_type.label.label-success full time
+        - elsif job.job_type == 'contract'
+          %span.job_type.label.label-warning contract
+        - else
+          %form#categorize_job.form-search{:method => "post", :action => '/categorize-job'}
+            %input{:type => "hidden", :name => "id", :value => job.id}
+            %select{:name => "job_type"}
+              %option{:value => "intern"} Internship
+              %option{:value => "cofounder"} Co-founder
+              %option{:value => "fulltime"} Full Time
+              %option{:value => "contract"} Contract
+            %input.btn{:type => "Submit"}
+        %h3
+          = job.position
+          %small
+            at
+            %a{:href => job.url, :target => 'blank'}= job.company
+        .job-description
+          = RDiscount.new(job.description, :smart, :filter_html).to_html
+        %a.btn{:href => "mailto:#{job.email}"} Contact
+        %a.btn{:href => "/admin/edit/#{job.id}"} Edit
+        %a.require-confirm.btn.btn-danger.deny-job{:href => "/deny/#{job.id}"} Delete
+  #subscriber_list.page-content.tab-pane
+    .job
+      %h3 #{@subscribers.count} Subscribers
+      %ul
+        - @subscribers.each do |subscriber|
+          %li= subscriber.username || subscriber.email
+
+.bottom-tear

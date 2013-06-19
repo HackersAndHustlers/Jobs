@@ -1,0 +1,21 @@
+.page-content
+  .job
+    %h2 Your Jobs
+  - @user_jobs.each do |job|
+    .job
+      - if job.job_type == 'intern'
+        %span.job_type.label intern
+      - elsif job.job_type == 'cofounder'
+        %span.job_type.label.label-info Co-founder
+      - elsif job.job_type == 'fulltime'
+        %span.job_type.label.label-success full time
+      - elsif job.job_type == 'contract'
+        %span.job_type.label.label-warning contract
+      %h3
+        = job.position
+        %small
+          at
+          %a{:href => job.url, :target => 'blank'}= job.company
+      .job-description
+        = RDiscount.new(job.description, :smart, :filter_html).to_html
+      %a.btn.btn-success{:href => "/dashboard/#{job.id}/edit"} Edit Job

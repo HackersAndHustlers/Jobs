@@ -1,0 +1,98 @@
+#post-job.page-content.both-rounded
+  .job
+    %form#edit-job-form{:action => "/admin/edit-job", :method => "post", :class => "form-horizontal"}
+      %fieldset
+        %input{:type => "hidden", :name => "id", :value => @job.id}
+        %legend
+          .control-group
+            %a{:href => "/admin"} &larr; Back to Admin
+            .controls
+              %h1 Edit A Job
+        .control-group
+          %label.control-label Job Title
+          .controls
+            %input#position{:type => "text", :name => "position", :class => "input-xlarge required", :value => @job.position}
+            %p.jserror.help-block#position_error{:for => "position"} This field is required.
+
+        .control-group
+          %label Job Type
+          .controls
+            %input.job_type#fulltime{:type => "radio", :name => "job_type", :class => "required", :value => "fulltime"}
+            %span.label.label-success Full Time
+            %input.job_type#cofounder{:type => "radio", :name => "job_type", :class => "required", :value => "cofounder"}
+            %span.label.label-info Co-Founder
+            %input.job_type#intern{:type => "radio", :name => "job_type", :class => "required", :value => "intern"}
+            %span.label Intern
+            %input.job_type#contract{:type => "radio", :name => "job_type", :class => "required", :value => "contract"}
+            %span.label.label-warning Contract
+            %p.jserror.help-block#jobtype_error{:for => "job_type"} This field is required.
+            :javascript
+              var jobType = "#{@job.job_type}";
+              if (jobType == 'fulltime') {
+                  $('#fulltime').attr('checked',true);
+              };
+               if (jobType == 'cofounder') {
+                  $('#fulltime').attr('checked',true);
+              };
+               if (jobType == 'intern') {
+                  $('#fulltime').attr('checked',true);
+              };
+               if (jobType == 'contract') {
+                  $('#fulltime').attr('checked',true);
+              };
+
+        .control-group
+          %label Company Name
+          .controls
+            %input#company{:type => "text", :name => "company", :class => "input-xlarge required", :value => @job.company}
+            %p.jserror.help-block#company_error{:for => "company"} This field is required.
+        
+        .control-group
+          %label City
+          .controls
+            .input-prepend
+              %span.add-on <i class="icon-map-marker"></i>
+              %input#location{:type => "text", :name => "location", :class => "input-xlarge required", :style => "width: 59%;", :value => @job.location}
+            %p.jserror.help-block#location{:for => "location"} This field is required.
+
+        .control-group
+          %label URL
+          .controls
+            .input-prepend
+              %span.add-on http://
+              %input#url{:type => "text", :name => "url", :class => "required", :style => 'width:55%;', :value => @job.url}
+            %p.jserror.help-block#url_error{:for => "url"} This field is required.
+
+        .control-group
+          %label Contact Email
+          .controls
+            %input#email{:type => 'email', :name => 'email', :class => "input-xlarge required", :value => @job.email}
+            %p.jserror.help-block#email_error{:for => "email"} This field is required.
+
+        .control-group
+          %label Job Description
+          .controls
+            %textarea#description{:name => "description", :rows => "6", :class => "input-xlarge required"}= @job.description
+            %p.help-block Use <a target="blank" href="http://daringfireball.net/projects/markdown/syntax#header">Markdown Formatting</a> (Optional)
+            %p.jserror.help-block#description_error{:for => "description"} This field is required.
+        
+        .job#job-preview
+          %span.job_type#preType intern
+          %h3
+            %a{:href => "#", :id => "preTitle"} Hacker
+            %small
+              at
+              %a{:href => "#", :id => "preBiz", :target => "blank_"} Olark
+          .job-location#preLocation
+            %img{:src => "http://maps.googleapis.com/maps/api/staticmap?center=#{@job.location}&zoom=10&size=100x100&sensor=false"}
+            %p= @job.location
+          .job-description#preDesc
+            Olark is looking for an awesome pythonista. We’ve got a lot of backend services that we need to scale now that we’re growing like crazy and we could really use your help. Thanks! Olark is looking for an awesome pythonista. 
+          %a.btn{ :href => "#", :id => "preEmail" } E-mail Olark about this job
+          %a.open{:href => "#" } &raquo;
+          .clear
+
+        .form-actions
+          %a#preview-job-button.btn.btn-large Preview Job
+          %input#edit-job-submit.btn.btn-primary.btn-large{:type => "submit", :value => "Submit Edited Job"}
+.bottom-tear

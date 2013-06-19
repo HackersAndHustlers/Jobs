@@ -1,0 +1,6 @@
+%form{:method => "post", :action => "/admin/auth", :class => "form-stacked"}
+  %label Secret Password
+  %input{:type => "password", :name => "password"}
+  %input.btn{:type => "Submit"}
+:javascript
+  $('input[type="password"]').focus();

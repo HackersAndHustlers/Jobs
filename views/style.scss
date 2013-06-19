@@ -1,0 +1,409 @@
+// Hackers & Hustlers Job Board
+body {
+  background-image: url('/bg2.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 115%;
+}
+
+::-moz-selection{ background: black; color: white; text-shadow: none; }
+::selection{ background: black; color: white; text-shadow: none; }
+
+.container > footer p {
+  text-align: center; /* center align it with the container */
+}
+
+.container {
+  width: 680px;
+}
+
+.clear {clear:both;}
+
+// animations
+
+@-webkit-keyframes fadeIn 
+{
+0%   {opacity: 0;}
+50%  {opacity: 0;}
+100% {opacity: 1;}
+}
+
+@-webkit-keyframes wiggle 
+{
+0%   {-webkit-transform: rotate(0deg);}
+33%  {-webkit-transform: rotate(-8deg);}
+66% {-webkit-transform: rotate(8deg);}
+100% {-webkit-transform: rotate(0deg);}
+}
+
+// Typography
+
+h1, h2, h3, h4 {
+  font-family: 'Rokkitt' sans-serif;
+}
+
+// Mixins
+
+@mixin black-button {
+  color: #fff;
+  font-family: 'Rokkitt' sans-serif;
+  font-size: 1.3em;
+  background-color: rgba(0,0,0,0.7);
+  padding: 6px 13px;
+  border-radius: 20px;
+  &:hover {
+    text-decoration: none;
+    background-color: #000;
+  }
+}
+
+// Page header
+
+.page-header {
+  padding-left: 50px;
+  border: none;
+  height: 120px;
+  margin: 40px 0px;
+  vertical-align: middle;
+  img#logo {
+    height: 120px;
+    float: left;
+    margin-right: 20px;
+    border-radius: 100%;
+    border: 2px solid rgba(255,255,255,0.15);
+    background-color: rgba(255,255,255,0.25);
+    -webkit-transition: background-color 0.25s;
+    -o-transition: background-color 0.25s;
+    -moz-transition: background-color 0.25s;
+  }
+  img#logo:hover {
+    background-color: rgba(255,255,255,0.7);
+    -webkit-animation: wiggle 0.4s;
+    cursor: pointer;
+  }
+  #header-content {
+    padding-top: 25px;
+    h1 {
+      font-size: 4em;
+      text-shadow: 0px 1px 2px rgba(0,0,0,0.9);
+      a { color: #fff;}
+      a:hover {text-decoration: none;}
+      small {
+        color: #fff;
+        text-shadow: 0px 1px 1px rgba(0,0,0,0.55);
+      }
+    }
+    color: #fff;
+    text-shadow: 0px 1px 1px rgba(0,0,0,0.55);
+    border: none !important;
+    p {
+      font-size: 1.5em;
+      a {
+        color: #fff;
+        text-decoration: underline;
+      }
+    } 
+  }
+}
+
+/* The content wrapper */
+.page {
+  -webkit-animation: fadeIn 1s;
+  margin-bottom: 40px;
+  .nav {
+    border-bottom: none;
+    margin-bottom: 1px !important;
+    .active a {
+      opacity: 1;
+      z-index: 50;
+      border: 1px solid #fff;
+      box-shadow: 1px 0px 0px rgba(0,0,0,0.25), -1px 0px 0px rgba(0,0,0,0.25), 0px -1px 0px rgba(0,0,0,0.25);
+    }
+    a {
+      opacity: 0.9;
+      font-weight: bold;
+      border-bottom: 1px solid #aaa;
+      border-top: 1px solid rgba(255,255,255,0.8);
+      box-shadow: 
+        1px 0px 0px rgba(0,0,0,0.15),
+        -1px 0px 0px rgba(0,0,0,0.15), 
+        0px -1px 0px rgba(0,0,0,0.15);
+    }
+    .all-jobs a {
+      color: #555555;
+    }
+    .cofounder-jobs a {
+      color: #3088AA;
+    }
+    .fulltime-jobs a {
+      color: #3C884E;
+    }
+    .contract-jobs a {
+      color: #FD9330;
+    }
+    .intern-jobs a {
+      color: #999999;
+    }
+    .label {
+      display: inline-block;
+    }
+  }
+  .actions {
+    float: right;
+    a {
+      position: relative;
+      top: 4px;
+      @include black-button;
+    }
+  }
+  .label {
+    padding: 1px 7px 3px;
+  }
+  .back {
+    padding-left: 15px;
+    height: 25px;
+    a { 
+      @include black-button;
+      float: left;
+      position: relative;
+      bottom: 10px;
+    }
+  }
+  .page-content {
+    background: #fff;
+    border-radius: 0px 10px;
+    box-shadow: 1px 0px 0px rgba(0,0,0,0.25), -1px 0px 0px rgba(0,0,0,0.25), 0px -1px 0px rgba(0,0,0,0.25);
+    &.both-rounded {border-radius: 10px 10px 0px 0px;}
+    .job {
+      padding: 20px 30px;
+      border-radius: 10px 10px 0 0;
+      border-bottom: 1px solid #ddd;
+      background-image: linear-gradient(bottom, rgb(242,242,242) 33%, rgb(255,255,255) 82%);
+      background-image: -o-linear-gradient(bottom, rgb(242,242,242) 33%, rgb(255,255,255) 82%);
+      background-image: -moz-linear-gradient(bottom, rgb(242,242,242) 33%, rgb(255,255,255) 82%);
+      background-image: -webkit-linear-gradient(bottom, rgb(242,242,242) 33%, rgb(255,255,255) 82%);
+      background-image: -ms-linear-gradient(bottom, rgb(242,242,242) 33%, rgb(255,255,255) 82%);
+      h1 small {
+        font-size: 0.8em;
+      }
+      h3 {font-size: 20px;}
+      h3 small, h2 small {font-size: 18px;}
+      h3 a {
+        color: #000;
+      }
+      h3 small a {
+        color: #3088AA;
+      }
+      // taming the twitter button
+      iframe { width: 90px !important;}
+      .job-location {
+        float: left;
+        img {
+          border-radius: 100%;
+          box-shadow: 0px 1px 1px #fff;
+          margin-right: 10px;
+        }
+        p {
+          font-size: 12px;
+          font-style: italic;
+          text-align: center;
+        }
+      }
+    }
+  }
+  #post-job {
+    form {
+      legend a {
+        font-size: 0.65em;
+        float: left;
+        color: #BFBFBF;
+        text-decoration: underline;
+      }
+      .label {
+        padding: 1px 3px 2px;
+      }
+      .form-actions {
+        background: transparent !important;
+      }
+      input[type='text'], textarea, input[type="email"] {
+        width: 65%;
+      }
+    }
+    
+    #create-job-submit, #edit-job-submit {
+      float: right;
+      margin-right: 30%;
+    }
+    #preview-job-button {
+      float: left;
+    }
+    .control-group {
+      display: block;
+    }
+    #job-preview {
+      display: none;
+      border-bottom: none;
+    }
+  }
+  .bottom-tear {
+    background-color: transparent !important;
+    background-image: url('/torn-bottom.png') !important;
+    height: 19px;
+  }
+}
+
+// About Page
+#about-page {
+  text-align: center;
+  padding-top: 50px;
+  width: 500px;
+  margin: 0 auto;
+  #back-link {
+    &:hover {text-decoration: none; cursor: pointer;}
+    #back-text {
+      color: #D0CAB1;
+      position: relative;
+      bottom: 110px;
+      display: block;
+    }
+    img {
+      height: 250px;
+      margin-bottom: 50px;
+      border-radius: 100%;
+      border: 5px solid rgba(255,255,255,0.15);
+      background-color: rgba(255,255,255,0.25);
+      -webkit-transition: background-color 0.25s;
+      -o-transition: background-color 0.25s;
+      -moz-transition: background-color 0.25s;
+      &:hover {
+        background-color: rgba(255,255,255,0.7);
+        -webkit-animation: wiggle 0.4s;
+        cursor: pointer;
+      }
+    }
+  }
+  h1, p {color: #fff;}
+  h1 {
+    font-size: 3em;
+    text-shadow: 0px 1px 2px rgba(0,0,0,0.9);
+    margin-bottom: 10px;
+  }
+  p {
+    font-size: 1.25em;
+    text-shadow: 0px 1px 1px rgba(0,0,0,0.5);
+    margin-bottom: 50px;
+  }
+  .job {
+    padding: 10px;
+    text-align: left;
+    &.head {
+      text-align: center;
+      i { color: #888;} 
+    }
+    p {
+      color: #555;
+      text-shadow: none;
+      font-size: 1em;
+      margin-bottom: 10px;
+    }
+    h3 {
+      padding-top: 10px;
+      font-size: 2em;
+      margin-bottom: 6px;
+    }
+  }
+  img.prof-pic {
+    border-radius: 15px;
+    border-bottom: 2px solid #fff;
+  }
+  #nathan {
+    img {
+      float: left;
+      margin-right: 15px;
+      margin-left: 10px;
+    }
+  }
+  #nate {
+    img {
+      float: right;
+      margin-left: 15px;
+      margin-right: 10px;
+    }
+    text-align: right;
+  }
+  .social {
+    display: inline-block;
+    a {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      margin-right: 2px;
+      background-image: url('/social-sprite.png');
+      opacity: 0.5;
+      -webkit-transition: opacity 0.25s;
+      &:hover {
+        opacity:1;
+        -webkit-animation: wiggle 0.3s;
+      }
+    }
+    a.twitter  {background-position: 0px 0px;}
+    a.tumblr   {background-position: -30px 0px;}
+    a.email    {background-position: -60px 0px;}
+    a.linkedin {background-position: -90px 0px;}
+    a.github   {background-position: -120px 0px;}
+    a.facebook {background-position: -150px 0px;}
+    a.dribbble {background-position: 30px 0px;}
+  }
+}
+
+
+
+footer {
+  border: none;
+  color: #fff;
+  -webkit-animation: fadeIn 1s;
+}
+
+#sidebar {
+  h2 {padding: 0px 18px 5px 0px !important;}
+}
+
+#jobDisc {
+  white-space: pre;
+}
+
+#subscribe-form {
+  h3 {
+    color: #0174D1;
+    font-size: 24px;
+  }
+}
+
+#unsubscribe-link {
+  color: #aaa;
+  float: right;
+  font-size: 10px;
+  position: relative;
+  top: 20px;
+}
+
+a.open{
+  float: right;
+  font-size: 50px;
+  color: #ddd;
+}
+
+a.open:hover {
+  text-underline: none;
+}
+
+.help-block a { color: #BFBFBF; text-decoration: underline;}
+
+.twitter-share-button {
+  float: right;
+  margin-top: 5px;
+}
+
+span.job_type {
+  float: right;
+}

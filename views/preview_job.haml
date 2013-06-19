@@ -1,0 +1,91 @@
+%h2 Preview Your Job Listing
+
+.tabbable
+  %ul.nav.nav-tabs
+    %li.active
+      %a{:href => "#preview_job", "data-toggle".to_sym => "tab"} 
+        Preview Job
+    %li
+      %a{:href => "#edit_job", "data-toggle".to_sym => "tab"} 
+        Edit Job
+
+.tab-content
+  #preview_job.page-content.tab-pane.active
+    .job
+      - if @job.job_type == 'intern'
+        %span.job_type.label intern
+      - elsif @job.job_type == 'cofounder'
+        %span.job_type.label.label-info Co-founder
+      - elsif @job.job_type == 'fulltime'
+        %span.job_type.label.label-success full time
+      - elsif @job.job_type == 'contract'
+        %span.job_type.label.label-warning contract
+      %h1
+        = @job.position
+        %small
+          at
+          %a{:href => @job.url}= @job.company
+      .job-description
+        = RDiscount.new(@job.description, :smart, :filter_html).to_html
+      %a#job-email-link.btn{:href => "mailto:#{@job.email}"} E-mail #{@job.company} about this job
+      %a{:href => "http://twitter.com/share", :class => "twitter-share-button", "data-lang" => "en", "data-url" => "http://hackersandhustlers.org/job/#{params[:id]}", "data-text" => "#{@job.company} is hiring a #{@job.position}", "data-via" => "hnhjobs"} Tweet
+      :javascript
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  #edit_job.page-content.tab-pane
+    .job
+      %form#create-job-form{:action => "/create-job", :method => "post", :class => "form-horizontal"}
+        %fieldset
+          %legend
+            .control-group
+              %a{:href => "/"} &larr; Back to All Jobs
+              .controls
+                %h1 Post A New Job
+          .control-group
+            %label.control-label Job Title
+            .controls
+              %input#position{:type => "text", :name => "position", :class => "input-xlarge required"}
+              %p.jserror.help-block#position_error{:for => "position"} This field is required.
+
+          .control-group
+            %label Job Type
+            .controls
+              %input.job_type{:type => "radio", :name => "job_type", :class => "required", :value => "fulltime"}
+              %span.label.label-success Full Time
+              %input.job_type{:type => "radio", :name => "job_type", :class => "required", :value => "cofounder"}
+              %span.label.label-info Co-Founder
+              %input.job_type{:type => "radio", :name => "job_type", :class => "required", :value => "intern"}
+              %span.label Intern
+              %input.job_type{:type => "radio", :name => "job_type", :class => "required", :value => "contract"}
+              %span.label.label-warning Contract
+              %p.jserror.help-block#jobtype_error{:for => "job_type"} This field is required.
+
+          .control-group
+            %label Company Name
+            .controls
+              %input#company{:type => "text", :name => "company", :class => "input-xlarge required"}
+              %p.jserror.help-block#company_error{:for => "company"} This field is required.
+
+          .control-group
+            %label URL
+            .controls
+              .input-prepend
+                %span.add-on http://
+                %input#url{:type => "text", :name => "url", :class => "required", :style => 'width:55%;'}
+              %p.jserror.help-block#url_error{:for => "url"} This field is required.
+
+          .control-group
+            %label Job Description
+            .controls
+              %textarea#description{:name => "description", :rows => "6", :class => "input-xlarge required"}
+              %p.help-block Use <a target="blank" href="http://daringfireball.net/projects/markdown/syntax#header">Markdown Formatting</a> (Optional)
+              %p.jserror.help-block#description_error{:for => "description"} This field is required.
+          
+          .form-actions
+            %input#create-job-submit.btn.btn-primary.btn-large{:type => "submit", :value => "Post Job"}
+.bottom-tear
+      
+:javascript
+  _kmq.push(['record', 'Previewed Job', {'Job Info':"#{@job.company} | #{@job.position}"}]);
+  $('#job-email-link').click(function(){
+  _kmq.push(['record', 'Emailed Company About Job', {'Job Info':"#{@job.company} | #{@job.position}"}]);
+  });

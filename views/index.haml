@@ -1,0 +1,151 @@
+.actions
+  %a#open-post-job-form{:href => "/subscribe"} Subscribe
+  %a#open-post-job-form{:href => "/post-job"} Post A Job <b>+</b>
+.tabbable
+  %ul.nav.nav-tabs
+    %li.active.all-jobs
+      %a{:href => "#all-jobs", "data-toggle".to_sym => "tab"} All Jobs
+    %li.cofounder-jobs
+      %a{:href => "#cofounder-jobs", "data-toggle".to_sym => "tab"} Co-Founder
+    %li.fulltime-jobs
+      %a{:href => "#fulltime-jobs", "data-toggle".to_sym => "tab"} Full-Time
+    %li.contract-jobs
+      %a{:href => "#contract-jobs", "data-toggle".to_sym => "tab"} Contract
+    %li.intern-jobs
+      %a{:href => "#intern-jobs", "data-toggle".to_sym => "tab"} Intern
+.tab-content
+  #all-jobs.page-content.tab-pane.active
+    - @jobs.each do |job|
+      .job
+        - if job.job_type == 'intern'
+          %span.job_type.label intern
+        - elsif job.job_type == 'cofounder'
+          %span.job_type.label.label-info Co-founder
+        - elsif job.job_type == 'fulltime'
+          %span.job_type.label.label-success full time
+        - elsif job.job_type == 'contract'
+          %span.job_type.label.label-warning contract
+        %h3
+          %a{:href => "/job/#{job.id}"}= job.position
+          %small
+            at
+            %a{:href => job.url, :target => 'blank'}= job.company
+        - if job.location
+          .job-location
+            %img{:src => "http://maps.googleapis.com/maps/api/staticmap?center=#{job.location}&zoom=10&size=100x100&sensor=false"}
+            %p= job.location
+        .job-description
+          = RDiscount.new(job.description, :smart, :filter_html).to_html
+        %a.btn{:href => "mailto:#{job.email}"} E-mail #{job.company} about this job
+        %a.open{:href => "/job/#{job.id}"} &raquo;
+        .clear
+
+  #cofounder-jobs.page-content.tab-pane
+    - @jobs.each do |job|
+      - if job.job_type == 'cofounder'
+        .job
+          - if job.job_type == 'intern'
+            %span.job_type.label intern
+          - elsif job.job_type == 'cofounder'
+            %span.job_type.label.label-info Co-founder
+          - elsif job.job_type == 'fulltime'
+            %span.job_type.label.label-success full time
+          - elsif job.job_type == 'contract'
+            %span.job_type.label.label-warning contract
+          %h3
+            = job.position
+            %small
+              at
+              %a{:href => job.url, :target => 'blank'}= job.company
+          - if job.location
+            .job-location
+              %img{:src => "http://maps.googleapis.com/maps/api/staticmap?center=#{job.location}&zoom=10&size=100x100&sensor=false"}
+              %p= job.location
+          .job-description
+            = RDiscount.new(job.description, :smart, :filter_html).to_html
+          %a.btn{:href => "mailto:#{job.email}"} E-mail #{job.company} about this job
+          %a.open{:href => "/job/#{job.id}"} &raquo;
+          .clear
+
+  #fulltime-jobs.page-content.tab-pane
+    - @jobs.each do |job|
+      - if job.job_type == 'fulltime'
+        .job
+          - if job.job_type == 'intern'
+            %span.job_type.label intern
+          - elsif job.job_type == 'cofounder'
+            %span.job_type.label.label-info Co-founder
+          - elsif job.job_type == 'fulltime'
+            %span.job_type.label.label-success full time
+          - elsif job.job_type == 'contract'
+            %span.job_type.label.label-warning contract
+          %h3
+            = job.position
+            %small
+              at
+              %a{:href => job.url, :target => 'blank'}= job.company
+          - if job.location
+            .job-location
+              %img{:src => "http://maps.googleapis.com/maps/api/staticmap?center=#{job.location}&zoom=10&size=100x100&sensor=false"}
+              %p= job.location
+          .job-description
+            = RDiscount.new(job.description, :smart, :filter_html).to_html
+          %a.btn{:href => "mailto:#{job.email}"} E-mail #{job.company} about this job
+          %a.open{:href => "/job/#{job.id}"} &raquo;
+          .clear
+
+  #contract-jobs.page-content.tab-pane
+    - @jobs.each do |job|
+      - if job.job_type == 'contract'
+        .job
+          - if job.job_type == 'intern'
+            %span.job_type.label intern
+          - elsif job.job_type == 'cofounder'
+            %span.job_type.label.label-info Co-founder
+          - elsif job.job_type == 'fulltime'
+            %span.job_type.label.label-success full time
+          - elsif job.job_type == 'contract'
+            %span.job_type.label.label-warning contract
+          %h3
+            = job.position
+            %small
+              at
+              %a{:href => job.url, :target => 'blank'}= job.company
+          - if job.location
+            .job-location
+              %img{:src => "http://maps.googleapis.com/maps/api/staticmap?center=#{job.location}&zoom=10&size=100x100&sensor=false"}
+              %p= job.location
+          .job-description
+            = RDiscount.new(job.description, :smart, :filter_html).to_html
+          %a.btn{:href => "mailto:#{job.email}"} E-mail #{job.company} about this job
+          %a.open{:href => "/job/#{job.id}"} &raquo;
+          .clear
+
+  #intern-jobs.page-content.tab-pane
+    - @jobs.each do |job|
+      - if job.job_type == 'intern'
+        .job
+          - if job.job_type == 'intern'
+            %span.job_type.label intern
+          - elsif job.job_type == 'cofounder'
+            %span.job_type.label.label-info Co-founder
+          - elsif job.job_type == 'fulltime'
+            %span.job_type.label.label-success full time
+          - elsif job.job_type == 'contract'
+            %span.job_type.label.label-warning contract
+          %h3
+            = job.position
+            %small
+              at
+              %a{:href => job.url, :target => 'blank'}= job.company
+          - if job.location
+            .job-location
+              %img{:src => "http://maps.googleapis.com/maps/api/staticmap?center=#{job.location}&zoom=10&size=100x100&sensor=false"}
+              %p= job.location
+          .job-description
+            = RDiscount.new(job.description, :smart, :filter_html).to_html
+          %a.btn{:href => "mailto:#{job.email}"} E-mail #{job.company} about this job
+          %a.open{:href => "/job/#{job.id}"} &raquo;
+          .clear
+          
+.bottom-tear

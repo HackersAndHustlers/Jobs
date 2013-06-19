@@ -1,0 +1,65 @@
+#sidebar.span4
+  
+  // twitter subscribe form
+  #subscribe{"data-original-title".to_sym => "Be A Connector.", "data-content".to_sym => "Community is everything for startups. Help grow ours by staying up-to-date on who's hiring, so you can connect growing startups to your talented friends."}
+    %form#subscribe-form{:action => "/subscribe", :method => "post", :class => "form-stacked well"}
+      %h3 Spread the Word!
+      %p Even if you're not looking for a job, you can still help H&amp;H startups by spreading the word. We'll tweet jobs at you, but only once or twice a week.
+      %label Twitter Username
+      .input-prepend
+        %span.add-on @
+        %input#username{:type => "text", :style => "width: 190px;", :name => "username"}
+        <label class="jserror" for="username" id="name_error">This field is required.</label>
+      %input#subscribe-submit{:type => "submit", :class => "btn primary", :value => "Subscribe"}
+      %a#unsubscribe-link{:href => "/unsubscribe"} Unsubscribe
+  
+  // Post job form
+  %form#create-job-form{:action => "/create-job", :method => "post", :class => "form-stacked well"}
+    %h2 Post A Job
+    .clearfix
+      %label Job Title
+      %input#position{:type => "text", :name => "position", :class => "required"}
+      %label.jserror#position_error{:for => "position"} This field is required.
+    
+    .clearfix
+      %label Job Type
+      %ul#job_types
+        %li
+          %input.job_type{:type => "radio", :name => "job_type", :class => "required", :value => "fulltime"}
+          %span.label.success Full Time
+        %li
+          %input.job_type{:type => "radio", :name => "job_type", :class => "required", :value => "cofounder"}
+          %span.label.notice Co-Founder
+        %li
+          %input.job_type{:type => "radio", :name => "job_type", :class => "required", :value => "intern"}
+          %span.label Intern
+        %li
+          %input.job_type{:type => "radio", :name => "job_type", :class => "required", :value => "contract"}
+          %span.label.warning Contract
+      %label.jserror#jobtype_error{:for => "job_type"} This field is required.
+    
+    .clearfix
+      %label Company Name
+      %input#company{:type => "text", :name => "company", :class => "required"}
+      %label.jserror#company_error{:for => "company"} This field is required.
+      
+    .clearfix
+      %label URL
+      .input-prepend
+        %span.add-on http://
+        %input#url{:type => "text", :name => "url", :class => "required", :style => "width: 165px;"}
+      %label.jserror#url_error{:for => "url"} This field is required.
+      
+    .clearfix
+      %label Contact Email
+      %input#email{:type => 'email', :name => 'email', :class => "required"}
+      %label.jserror#email_error{:for => "email"} This field is required.
+      
+    .clearfix
+      %label Job Description
+      %textarea#description{:name => "description", :rows => "8", :class => "required"}
+      %span.help-block Use <a target="blank" href="http://daringfireball.net/projects/markdown/syntax#header">Markdown Formatting</a> (Optional)
+      %label.jserror#description_error{:for => "description"} This field is required.
+      
+    %br
+    %input#create-job-submit{:type => "submit", :class => "btn success", :value => "Post Job"}

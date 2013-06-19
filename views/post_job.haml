@@ -1,0 +1,130 @@
+#post-job.page-content.both-rounded
+  .job
+    %form#create-job-form{:action => "/create-job", :method => "post", :class => "form-horizontal"}
+      %fieldset
+        %legend
+          .control-group
+            %a{:href => "/"} &larr; Back to All Jobs
+            .controls
+              %h1 Post A New Job
+        .control-group
+          %label.control-label Job Title
+          .controls
+            %input#position{:type => "text", :name => "position", :class => "input-xlarge required", :placehoder => "Ruby Developer"}
+            %p.jserror.help-block#position_error{:for => "position"} This field is required.
+
+        .control-group
+          %label Job Type
+          .controls
+            %input.job_type{:type => "radio", :name => "job_type", :class => "required", :value => "fulltime"}
+            %span.label.label-success Full Time
+            %input.job_type{:type => "radio", :name => "job_type", :class => "required", :value => "cofounder"}
+            %span.label.label-info Co-Founder
+            %input.job_type{:type => "radio", :name => "job_type", :class => "required", :value => "intern"}
+            %span.label Intern
+            %input.job_type{:type => "radio", :name => "job_type", :class => "required", :value => "contract"}
+            %span.label.label-warning Contract
+            %p.jserror.help-block#jobtype_error{:for => "job_type"} This field is required.
+
+        .control-group
+          %label Company Name
+          .controls
+            %input#company{:type => "text", :name => "company", :class => "input-xlarge required"}
+            %p.jserror.help-block#company_error{:for => "company"} This field is required.
+
+        .control-group#badger
+          %label#badger 
+          .controls#badger
+            %input#badger{:type => "text", :name => "badger"}
+        
+        .control-group
+          %label City
+          .controls
+            .input-prepend
+              %span.add-on <i class="icon-map-marker"></i>
+              %input#location{:type => "text", :name => "location", :class => "input-xlarge required", :style => "width: 59%;"}
+            %p.jserror.help-block#location{:for => "location"} This field is required.
+
+        .control-group
+          %label URL
+          .controls
+            .input-prepend
+              %span.add-on http://
+              %input#url{:type => "text", :name => "url", :class => "required", :style => 'width:55%;'}
+            %p.jserror.help-block#url_error{:for => "url"} This field is required.
+
+        .control-group
+          %label Contact Email
+          .controls
+            %input#email{:type => 'email', :name => 'email', :class => "input-xlarge required"}
+            %p.jserror.help-block#email_error{:for => "email"} This field is required.
+
+        .control-group
+          %label Job Description
+          .controls
+            %textarea#description{:name => "description", :rows => "6", :class => "input-xlarge required"}
+            %p.help-block Use <a target="blank" href="http://daringfireball.net/projects/markdown/syntax#header">Markdown Formatting</a> (Optional)
+            %p.jserror.help-block#description_error{:for => "description"} This field is required.
+
+        
+        .job#job-preview
+          %span.job_type#preType intern
+          %h3
+            %a{:href => "#", :id => "preTitle"} Hacker
+            %small
+              at
+              %a{:href => "#", :id => "preBiz", :target => "blank_"} Olark
+          .job-location#preLocation
+            %img{:src => "http://maps.googleapis.com/maps/api/staticmap?center=&zoom=10&size=100x100&sensor=false"}
+            %p Job Location
+          .job-description#preDesc
+            Olark is looking for an awesome pythonista. We’ve got a lot of backend services that we need to scale now that we’re growing like crazy and we could really use your help. Thanks! Olark is looking for an awesome pythonista. 
+          %a.btn{ :href => "#", :id => "preEmail" } E-mail Olark about this job
+          %a.open{:href => "#" } &raquo;
+          .clear
+        .form-actions
+          %a#preview-job-button.btn.btn-large Preview Job
+          %input#create-job-submit.btn.btn-primary.btn-large{:type => "submit", :value => "Post Job"}
+.bottom-tear
+:css
+  .loader {
+      text-align: center;    
+  }
+  .loader span {
+      display: inline-block;
+      vertical-align: middle;
+      width: 40px;
+      height: 40px;
+      margin: 50px auto;
+      background: #ccc;
+      border-radius: 50px;
+      -webkit-animation: loader 0.9s infinite alternate;
+      -moz-animation: loader 0.9s infinite alternate;
+  }
+  .loader span:nth-of-type(2) {
+      -webkit-animation-delay: 0.3s;
+      -moz-animation-delay: 0.3s;
+  }
+  .loader span:nth-of-type(3) {
+      -webkit-animation-delay: 0.6s;
+      -moz-animation-delay: 0.6s;
+  }
+  #badger {
+    display: none;
+  }
+  @-webkit-keyframes loader {
+    0% {
+      opacity: 0.9;
+    }
+    100% {;
+      opacity: 0.1;
+    }
+  }
+  @-moz-keyframes loader {
+    0% {
+      opacity: 0.9;
+    }
+    100% {
+      opacity: 0.1;
+    }
+  }​

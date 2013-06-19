@@ -1,0 +1,14 @@
+.back
+  %a{:href => "/"} &larr; All Jobs
+.page-content.both-rounded
+  .job
+    %form#subscribe-form{:action => "/new-subscriber", :method => "post", :class => "form-stacked"}
+      %h3 Subscribe To Our List
+      %p Even if you're not looking for a job, you can still help H&amp;H startups by spreading the word. We'll email you once a week with a digest of awesome startup jobs.
+      %label Email Address
+      .input-prepend
+        %span.add-on <i class="icon-envelope"></i>
+        %input#email{:type => "email", :style => "width: 190px;", :name => "email"}
+        <label class="jserror" for="email" id="email_error">This field is required.</label>
+      %input#subscribe-submit{:type => "submit", :class => "btn primary", :value => "Subscribe"}
+.bottom-tear

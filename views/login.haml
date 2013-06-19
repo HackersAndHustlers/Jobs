@@ -1,0 +1,12 @@
+.back
+  %a{:href => "/"} &larr; All Jobs
+.page-content.both-rounded
+  .job
+    %form#login-form{:action => "/login", :method => "post", :class => "form-stacked"}
+      %h3 Login
+      %label Email Address
+      %input#email{:type => "email", :style => "width: 190px;", :name => "email"}
+      %label Password
+      %input#password{:type => "password", :style => "width: 190px;", :name => "password"}
+      %input{:type => "submit", :class => "btn primary", :value => "Login"}
+.bottom-tear
