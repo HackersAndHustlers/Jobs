@@ -1,4 +1,6 @@
+.env
+.bundle
+/bin
 .sass-cache/*
 tmp/*
-start-server
 .DS_Store
