@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 gem 'sinatra'
+gem 'dotenv', '~> 0.8.0'
 gem 'haml'
 gem 'sass'
 gem 'mongo_mapper'
