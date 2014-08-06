@@ -122,14 +122,14 @@ $(function() {
      // hide previous errors
     $('.jserror').hide();
     
-    var position = escape($("input#position").val());
-    var job_type = escape($("input.job_type:checked").val());
-    var company = escape($("input#company").val());
-    var location = escape($("input#location").val());
-    var url = escape($("input#url").val());
-    var email = escape($("input#email").val());
-    var description = escape($("textarea#description").val());
-    var badger = escape($("input#badger").val());
+    var position = $("input#position").val();
+    var job_type = $("input.job_type:checked").val();
+    var company = $("input#company").val();
+    var location = $("input#location").val();
+    var url = $("input#url").val();
+    var email = $("input#email").val();
+    var description = $("textarea#description").val();
+    var badger = $("input#badger").val();
     
     // validate position input
     if (position == "") {
@@ -184,14 +184,13 @@ $(function() {
       return false;
     }
     
-    // setup datastring
-    var dataString = 'position='+ position + '&job_type=' + job_type + '&company=' + company + '&location=' + location + '&url=' + url + '&email=' + email + '&description=' + description + '&badger=' + badger;
-    
+    var data = {"position": position, "job_type": job_type, "company": company, "location": location, "url": url, "email": email, "description": description, "badger": badger};
+
     // post the form using ajax
     $.ajax({  
       type: "POST",  
       url: "/create-job",
-      data: dataString,
+      data: data,
       beforeSend: function() {
         // Show loading state
         var loadingState = '<div class="loader"><span></span> <span></span> <span></span></div>';
