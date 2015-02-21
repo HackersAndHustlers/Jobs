@@ -106,7 +106,7 @@ post '/create-job' do
     end
     # Email them
     mail = Mail.new do
-      from    'nathan@hackersandhustlers.org'
+      from    'chase@hackersandhustlers.org'
       to      job.email
       subject 'Got your job'
       body    "Thanks for posting to H&H! We'll review your job ASAP and get back to you."
@@ -191,7 +191,7 @@ get '/approve-job' do
     
     # Email them
     mail = Mail.new do
-      from    'nathan@hackersandhustlers.org'
+      from    'chase@hackersandhustlers.org'
     end
     mail.to = @approved_job.email
     mail.subject = 'Your job is live!'
