@@ -96,20 +96,6 @@ post '/create-job' do
       # set up a client to talk to the Twilio REST API
       @client = Twilio::REST::Client.new account_sid, auth_token
       
-      # text nathan
-      @client.account.sms.messages.create(
-        :from => ENV['TWILIO_FROM_NUMBER'],
-        :to => ENV['BASHAW'],
-        :body => "#{params[:company]} just posted a job!"
-      )
-      
-      # text nate
-      @client.account.sms.messages.create(
-        :from => ENV['TWILIO_FROM_NUMBER'],
-        :to => ENV['WEST'],
-        :body => "#{params[:company]} just posted a job!"
-      )
-      
       # text chase
       @client.account.sms.messages.create(
         :from => ENV['TWILIO_FROM_NUMBER'],
