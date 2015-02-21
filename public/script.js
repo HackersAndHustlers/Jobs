@@ -199,7 +199,7 @@ $(function() {
       success: function() {
         $('#create-job-form').html("<div id='message'></div>");  
         $('#message').html("<h2>Job Posted!</h2>")  
-        .append("<p>We'll review it and get back to you as soon as possible. If you've got any questions, just email <a href='mailto:nbashaw@gmail.com'>nbashaw@gmail.com</a>.</p>");
+        .append("<p>We'll review it and get back to you as soon as possible. If you've got any questions, just email <a href='mailto:chase@hackersandhustlers.org'>chase@hackersandhustlers.org</a>.</p>");
         _kmq.push(['record', 'Subscribed']);
       }
     });
